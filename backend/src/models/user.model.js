@@ -1,0 +1,33 @@
+const mongoose = require("mongoose")
+
+const userSchema = new mongoose.Schema({
+    fullname: String,
+    username: {
+        type: String,
+        unique: [true, "username already exists. try another."],
+        required: [true, "username is required."]
+    },
+    email:{
+        type: String,
+        unique: [true, "email already exists"],
+        required: [true, "email is required."]
+    },
+    password:{
+        type: String,
+        required: [true, "password is required."],
+        select: false
+    },
+    bio: String,
+    profileImage:{
+        type: String,
+        default: "https://ik.imagekit.io/bhaveshkumar/default.webp"
+    },
+    otp: {
+        code: String,       // store hashed OTP
+        expiresAt: Date     // expiry time
+    }
+})
+
+const userModel = mongoose.model("users", userSchema)
+
+module.exports = userModel
