@@ -1,10 +1,20 @@
-require("dotenv").config()
-const app = require("./src/app")
-const connectToDB = require("./src/config/database")
+require("dotenv").config();
+const app = require("./src/app");
+const http = require("http");
+const { initSocket } = require("./src/config/socket.js");
+const connectToDB = require("./src/config/database");
 
-connectToDB()
+// Create HTTP server for Socket.IO
+const server = http.createServer(app);
 
+// Connect to MongoDB
+connectToDB();
 
-app.listen(3000,()=>{
-    console.log('Server is running at port 3000.');
-})
+// Initialize Socket.IO
+initSocket(server);
+
+// Listen on server (not app)
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+  console.log(`Server is running at port ${PORT}`);
+});

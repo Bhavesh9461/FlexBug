@@ -130,6 +130,7 @@ const loginController = async (req, res) => {
     res.status(200).json({
       message: "user loggedIn successful.",
       user: {
+        userId: user._id,
         fullname: user.fullname,
         username: user.username,
         email: user.email,
@@ -314,6 +315,7 @@ const verifyOtpController = async (req, res) => {
       message: "User verified and created successfully",
       success: true,
       user: {
+        userId: user._id,
         fullname: user.fullname,
         username: user.username,
         email: user.email,

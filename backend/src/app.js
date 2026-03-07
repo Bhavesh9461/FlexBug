@@ -9,7 +9,10 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
     credentials: true,
-    origin: process.env.FRONTEND_URL
+    origin: [
+        "http://localhost:5173",          // React dev server
+        process.env.REACT_APP_SOCKET_URL // ngrok URL for mobile
+      ],
 }))
 app.use(express.static("./public"))
 
@@ -18,11 +21,13 @@ app.use(express.static("./public"))
 const authRouter = require("./routes/auth.routes")
 const postRouter = require("./routes/post.routes")
 const userRouter = require("./routes/user.routes")
+const callRoutes = require("./routes/call.routes")
 
 /** using routes */
 app.use("/api/auth", authRouter)
 app.use("/api/posts", postRouter)
 app.use("/api/users", userRouter)
+app.use("/api/call", callRoutes)
 
 
 app.use('*name',(req,res)=>{

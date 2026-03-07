@@ -8,6 +8,7 @@ import Profile from "./features/Dashboard/pages/Profile";
 import MainLayout from "./features/Dashboard/pages/MainLayout";
 import ProtectedRoute from "./features/controller/ProtectedRoute";
 import MessagePage from "./features/Dashboard/pages/MessagePage";
+import VideoCall from "./features/videoCall/components/VideoCall";
 
 const AppRoutes = () => {
   return (
